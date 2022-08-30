@@ -1,8 +1,7 @@
 node_modules/
 .vscode
-
-# Local Netlify folder
-.netlify
+.parcel-cache
+dist
 
 # OS generated files
 .DS_Store

@@ -2,20 +2,26 @@
   "name": "selectra-code-challenge",
   "version": "1.0.0",
   "description": "Coding challenge proposed by the Selectra team, which consists of creating a subscription form.",
-  "main": "index.js",
-  "scripts": {},
+  "source": "public/index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "dev": "npm run clean && parcel --no-source-maps",
+    "build": "parcel build"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.18.10",
     "@babel/core": "^7.18.13",
-    "@babel/preset-env": "^7.18.10",
-    "@babel/preset-react": "^7.18.6",
-    "parcel": "^2.7.0"
+    "babel-plugin-styled-components": "^2.0.7",
+    "parcel": "^2.7.0",
+    "parcel-reporter-clean-dist": "^1.0.4",
+    "process": "^0.11.10"
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.5"
   }
 }
