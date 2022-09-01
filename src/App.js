@@ -1,10 +1,12 @@
 import React from 'react';
+import Theme from './components/styles/Theme';
+import GlobalStyles from './components/styles/Global';
 
 function App() {
   return (
-    <>
-      <h1>Selectra Code Challenge</h1>
-    </>
+    <Theme>
+      <GlobalStyles />
+    </Theme>
   );
 }
 
