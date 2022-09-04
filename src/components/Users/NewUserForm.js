@@ -1,57 +1,63 @@
 import { React, useState } from 'react';
-import { StyledForm, Label, Input } from '../styles/UserForm.styled';
+import useInput from '../hooks/use-input';
+import {
+  StyledForm,
+  Label,
+  Input,
+  AlertMessage,
+} from '../styles/UserForm.styled';
 import { Button } from '../styles/Button.styled';
 
 function SubscriptionForm(props) {
-  const [userInput, setUserInput] = useState({
-    enteredName: '',
-    enteredEmail: '',
-    enteredPhone: '',
-  });
+  const {
+    value: enteredName,
+    isValid: enteredNameIsValid,
+    hasError: nameInputHasError,
+    valueChangeHandler: nameChangeHandler,
+    inputBlurHandler: nameInputBlurHandler,
+    reset: resetNameInput,
+  } = useInput(value => value.trim() !== '');
 
-  const nameInputChangeHandler = event => {
-    setUserInput(prevUserInput => {
-      return {
-        ...prevUserInput,
-        enteredName: event.target.value,
-      };
-    });
-  };
+  const {
+    value: enteredEmail,
+    isValid: enteredEmailIsValid,
+    hasError: emailInputHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailInputBlurHandler,
+    reset: resetEmailValue,
+  } = useInput(value => value.includes('@'));
 
-  const emailInputChangeHandler = event => {
-    setUserInput(prevUserInput => {
-      return {
-        ...prevUserInput,
-        enteredEmail: event.target.value,
-      };
-    });
-  };
+  const {
+    value: enteredPhone,
+    isValid: enteredPhoneIsValid,
+    hasError: phoneInputHasError,
+    valueChangeHandler: phoneChangeHandler,
+    inputBlurHandler: phoneInputBlurHandler,
+    reset: resetPhoneValue,
+  } = useInput(value => value.length === 9 && value[0] === '6');
 
-  const phoneInputChangeHandler = event => {
-    setUserInput(prevUserInput => {
-      return {
-        ...prevUserInput,
-        enteredPhone: event.target.value,
-      };
-    });
-  };
+  let formIsValid = false;
+  if (enteredNameIsValid && enteredEmailIsValid && enteredPhoneIsValid)
+    formIsValid = true;
 
   const formSubmissionHandler = event => {
     event.preventDefault();
 
+    if (!enteredNameIsValid && !enteredEmailIsValid && !enteredPhoneIsValid) {
+      return;
+    }
+
     const userData = {
-      userName: userInput.enteredName,
-      userEmail: userInput.enteredEmail,
-      userPhone: userInput.enteredPhone,
+      userName: enteredName,
+      userEmail: enteredEmail,
+      userPhone: enteredPhone,
     };
 
     props.onSaveUserData(userData);
 
-    setUserInput({
-      enteredName: '',
-      enteredEmail: '',
-      enteredPhone: '',
-    });
+    resetNameInput();
+    resetEmailValue();
+    resetPhoneValue();
 
     return userData;
   };
@@ -64,12 +70,19 @@ function SubscriptionForm(props) {
           <i aria-hidden="true">*</i>
         </span>
         <Input
-          onChange={nameInputChangeHandler}
           type="text"
-          value={userInput.enteredName}
           aria-required="true"
           placeholder="Your name"
+          onChange={nameChangeHandler}
+          onBlur={nameInputBlurHandler}
+          value={enteredName}
+          invalid={nameInputHasError}
+          valid={enteredNameIsValid}
         />
+
+        {nameInputHasError && (
+          <AlertMessage>Name not must be empty.</AlertMessage>
+        )}
       </Label>
       <Label>
         <span>
@@ -77,27 +90,36 @@ function SubscriptionForm(props) {
           <i aria-hidden="true">*</i>
         </span>
         <Input
-          onChange={emailInputChangeHandler}
           type="email"
-          value={userInput.enteredEmail}
           aria-required="true"
           placeholder="Your email"
+          onChange={emailChangeHandler}
+          onBlur={emailInputBlurHandler}
+          value={enteredEmail}
+          invalid={emailInputHasError}
         />
       </Label>
+      {/* {emailInputHasError && (
+        <AlertMessage>Name not must be empty.</AlertMessage>
+      )} */}
       <Label>
         <span>
           Phone
           <i aria-hidden="true">*</i>
         </span>
         <Input
-          onChange={phoneInputChangeHandler}
           type="number"
-          value={userInput.enteredPhone}
           aria-required="true"
           placeholder="623456789"
+          onChange={phoneChangeHandler}
+          onBlur={phoneInputBlurHandler}
+          value={enteredPhone}
+          invalid={phoneInputHasError}
         />
       </Label>
-      <Button type="submit">Add subscription</Button>
+      <Button type="submit" disabled={!formIsValid}>
+        Add subscription
+      </Button>
     </StyledForm>
   );
 }
