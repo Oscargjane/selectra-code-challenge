@@ -98,10 +98,10 @@ function SubscriptionForm(props) {
           value={enteredEmail}
           invalid={emailInputHasError}
         />
+        {emailInputHasError && (
+          <AlertMessage>Please enter a valid email.</AlertMessage>
+        )}
       </Label>
-      {/* {emailInputHasError && (
-        <AlertMessage>Name not must be empty.</AlertMessage>
-      )} */}
       <Label>
         <span>
           Phone
@@ -116,6 +116,12 @@ function SubscriptionForm(props) {
           value={enteredPhone}
           invalid={phoneInputHasError}
         />
+        {emailInputHasError && (
+          <AlertMessage>
+            Please enter a valid phone number{' '}
+            <i>(must start with 6 and contain 9 digits)</i>.
+          </AlertMessage>
+        )}
       </Label>
       <Button type="submit" disabled={!formIsValid}>
         Add subscription
