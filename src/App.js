@@ -1,13 +1,20 @@
-import { React, useState } from 'react';
-import Theme from './components/styles/Theme';
-import GlobalStyles from './components/styles/Global';
-import { Container } from './components/styles/Container.styled';
+import { React, useState, useEffect } from 'react';
+import useLocalStorage from './components/hooks/use-localStorage';
 import MainHeader from './components/MainHeader/MainHeader';
 import NewUserForm from './components/Users/NewUserForm';
 import UserList from './components/Users/UserList';
+import Theme from './components/styles/Theme';
+import GlobalStyles from './components/styles/Global';
+import { Container } from './components/styles/Container.styled';
 
 function App() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(
+    JSON.parse(localStorage.getItem('users')) ?? []
+  );
+
+  useEffect(() => {
+    localStorage.setItem('users', JSON.stringify(users));
+  }, [users]);
 
   const saveUserDataHandler = enteredUserData => {
     const userData = {
@@ -16,7 +23,6 @@ function App() {
     };
 
     setUsers(prevUsers => {
-      console.log([userData, ...prevUsers]);
       return [userData, ...prevUsers];
     });
 
