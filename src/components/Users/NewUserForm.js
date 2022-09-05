@@ -1,11 +1,11 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import useInput from '../hooks/use-input';
 import {
   StyledForm,
   Label,
   Input,
   AlertMessage,
-} from '../styles/UserForm.styled';
+} from '../styles/NewUserForm.styled';
 import { Button } from '../styles/Button.styled';
 
 function SubscriptionForm(props) {
@@ -64,65 +64,67 @@ function SubscriptionForm(props) {
 
   return (
     <StyledForm onSubmit={formSubmissionHandler}>
-      <Label>
-        <span>
-          Name
-          <i aria-hidden="true">*</i>
-        </span>
-        <Input
-          type="text"
-          aria-required="true"
-          placeholder="Your name"
-          onChange={nameChangeHandler}
-          onBlur={nameInputBlurHandler}
-          value={enteredName}
-          invalid={nameInputHasError}
-          valid={enteredNameIsValid}
-        />
+      <div>
+        <Label>
+          <span>
+            Name
+            <i aria-hidden="true">*</i>
+          </span>
+          <Input
+            type="text"
+            aria-required="true"
+            placeholder="Your name"
+            onChange={nameChangeHandler}
+            onBlur={nameInputBlurHandler}
+            value={enteredName}
+            invalid={nameInputHasError}
+            valid={enteredNameIsValid}
+          />
 
-        {nameInputHasError && (
-          <AlertMessage>Name not must be empty.</AlertMessage>
-        )}
-      </Label>
-      <Label>
-        <span>
-          Email
-          <i aria-hidden="true">*</i>
-        </span>
-        <Input
-          type="email"
-          aria-required="true"
-          placeholder="Your email"
-          onChange={emailChangeHandler}
-          onBlur={emailInputBlurHandler}
-          value={enteredEmail}
-          invalid={emailInputHasError}
-        />
-        {emailInputHasError && (
-          <AlertMessage>Please enter a valid email.</AlertMessage>
-        )}
-      </Label>
-      <Label>
-        <span>
-          Phone
-          <i aria-hidden="true">*</i>
-        </span>
-        <Input
-          type="number"
-          aria-required="true"
-          placeholder="623456789"
-          onChange={phoneChangeHandler}
-          onBlur={phoneInputBlurHandler}
-          value={enteredPhone}
-          invalid={phoneInputHasError}
-        />
-        {emailInputHasError && (
-          <AlertMessage>
-            Please enter a valid phone number{' '}
-            <i>(must start with 6 and contain 9 digits)</i>.
-          </AlertMessage>
-        )}
-      </Label>
+          {nameInputHasError && (
+            <AlertMessage>Name not must be empty.</AlertMessage>
+          )}
+        </Label>
+        <Label>
+          <span>
+            Email
+            <i aria-hidden="true">*</i>
+          </span>
+          <Input
+            type="email"
+            aria-required="true"
+            placeholder="Your email"
+            onChange={emailChangeHandler}
+            onBlur={emailInputBlurHandler}
+            value={enteredEmail}
+            invalid={emailInputHasError}
+          />
+          {emailInputHasError && (
+            <AlertMessage>Please enter a valid email.</AlertMessage>
+          )}
+        </Label>
+        <Label>
+          <span>
+            Phone
+            <i aria-hidden="true">*</i>
+          </span>
+          <Input
+            type="number"
+            aria-required="true"
+            placeholder="623456789"
+            onChange={phoneChangeHandler}
+            onBlur={phoneInputBlurHandler}
+            value={enteredPhone}
+            invalid={phoneInputHasError}
+          />
+          {phoneInputHasError && (
+            <AlertMessage>
+              Please enter a valid phone number{' '}
+              <i>(must start with 6 and contain 9 digits)</i>.
+            </AlertMessage>
+          )}
+        </Label>
+      </div>
       <Button type="submit" disabled={!formIsValid}>
         Add subscription
       </Button>
