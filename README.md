@@ -6,7 +6,6 @@
 
 - [**Quick start**](#-quick-start)
 - [Built With](#%EF%B8%8F-built-with)
-- [License](#%EF%B8%8F-license)
 - [Connect with me](#%EF%B8%8F-connect-with-me)
 - [Deploy](#-deploy)
 
