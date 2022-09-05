@@ -14,12 +14,21 @@ export const Button = styled.button`
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 250ms;
 
+  &:hover,
+  &:active {
+    transform: translateY(0.25rem);
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
   &:disabled,
   &:disabled:hover,
   &:disabled:active {
     color: ${({ theme }) => theme.colors.gray_500};
     background-color: ${({ theme }) => theme.colors.gray_300};
     cursor: not-allowed;
+    transform: translateY(0);
   }
 
   @media only screen and (min-width: ${({ theme }) => theme.bp.small}) {

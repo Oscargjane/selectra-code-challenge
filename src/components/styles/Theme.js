@@ -29,6 +29,7 @@ const theme = {
     alert_400: '#B91C1C',
     alert_500: '#7F1D1D',
   },
+  // Break Points
   bp: {
     large: '75em', // 1200px
     medium: '56.25em', // 900px

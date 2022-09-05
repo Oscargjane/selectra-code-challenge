@@ -18,6 +18,10 @@ const GlobalStyles = createGlobalStyle`
   html {
     box-sizing: border-box;
     font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
+
+    @media only screen and (min-width: ${({ theme }) => theme.bp.medium}) {
+      font-size: 75%;
+    }
   }
 
   /* 4. Allow percentage-based heights in the application */
