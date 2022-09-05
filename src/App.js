@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from 'react';
-import useLocalStorage from './components/hooks/use-localStorage';
 import MainHeader from './components/MainHeader/MainHeader';
 import NewUserForm from './components/Users/NewUserForm';
 import UserList from './components/Users/UserList';
